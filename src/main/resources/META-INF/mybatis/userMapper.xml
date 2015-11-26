@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.repository.mybatis.MybatisTestRepository">
+
+
+	<select id="find" resultType="MybatisTestEntity">
+		select 
+        	id 									id, 
+        	name 								name 
+        from 
+             user
+	</select>
+	
+	<select id="findAndPage" resultType="MybatisTestEntity"  parameterType="com.boot.vo.common.MybatisPage" >
+		select 
+        	id 									id, 
+        	name 								name 
+        from 
+             user
+	</select>
+	
+</mapper> 
