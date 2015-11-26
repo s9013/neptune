@@ -19,7 +19,7 @@ public class Person {
 
 	private Integer ssn;
 	@DBRef
-	private List<Account> accounts;
+	private List<Account2> accounts;
 
 	public String getId() {
 		return id;
@@ -37,11 +37,11 @@ public class Person {
 		this.ssn = ssn;
 	}
 
-	public List<Account> getAccounts() {
+	public List<Account2> getAccounts() {
 		return accounts;
 	}
 
-	public void setAccounts(List<Account> accounts) {
+	public void setAccounts(List<Account2> accounts) {
 		this.accounts = accounts;
 	}
 

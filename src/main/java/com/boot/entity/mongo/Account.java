@@ -1,18 +1,50 @@
 package com.boot.entity.mongo;
 
+import java.io.Serializable;
+
 import javax.persistence.Id;
 
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * @Auth jay
- * @date 2015年11月26日 下午2:31:15
+ * @ClassName: Account
+ * @Description:
+ * @author Jay
+ * @date 2015年11月26日 下午9:23:41
  */
-@Document(collection="account")
-public class Account {
+@Document(collection = "account")
+public class Account implements Serializable {
+
+	private static final long serialVersionUID = 2422497762978734599L;
+
 	@Id
 	private String id;
-	private Float total;
+
+	@Indexed(unique = true)
+	private String username;
+
+	private String password;
+
+	@DBRef
+	private User user;
+
+	public Account() {
+	}
+
+	public Account(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public String getId() {
 		return id;
@@ -22,27 +54,25 @@ public class Account {
 		this.id = id;
 	}
 
-	public Float getTotal() {
-		return total;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setTotal(Float total) {
-		this.total = total;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public Account() {
-		super();
-		// TODO Auto-generated constructor stub
+	public String getPassword() {
+		return password;
 	}
 
-	public Account(Float total) {
-		super();
-		this.total = total;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", total=" + total + "]";
+		return "Account [id=" + id + ", username=" + username + ", password=" + password + ", user=" + user + "]";
 	}
 
 }

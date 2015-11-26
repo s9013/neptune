@@ -20,7 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.boot.entity.mongo.Account;
+import com.boot.entity.mongo.Account2;
 import com.boot.entity.mongo.Friends;
 import com.boot.entity.mongo.Group;
 import com.boot.entity.mongo.Person;
@@ -52,7 +52,7 @@ public class FirendCircleTest {
 	/**
 	 * 添加成员
 	 */
-	@Ignore
+	//@Ignore
 	@Test
 	public void testAddUser() {
 		logger.info("add user");
@@ -68,9 +68,9 @@ public class FirendCircleTest {
 	@Test
 	@Transactional
 	public void testAddFriend() {
-		String userId = "56567084e4b02efa2731656f";//jay
+		String userId = "565704aa77da781e71e1807b";//jay
 		//String addedUserId = "56567084e4b02efa27316570";//jack
-		String addedUserId = "56567084e4b02efa27316571";//mike
+		String addedUserId = "565704aa77da781e71e1807c";//mike
 		//String addedUserId = "56567084e4b02efa27316572";//seal  添加
 		
 		Query query = new Query();
@@ -133,7 +133,7 @@ public class FirendCircleTest {
 	@Test
 	@Transactional
 	public void testGetFriend() {
-		Friends friends = mongoTemplate.findOne(new Query(Criteria.where("id").is( "5656bb1be4b0503479000631")),Friends.class);
+		Friends friends = mongoTemplate.findOne(new Query(Criteria.where("userId").is( "565704aa77da781e71e1807b")),Friends.class);
 		logger.info("result: " + friends.toString());
 	}
 	
@@ -155,14 +155,14 @@ public class FirendCircleTest {
 		Person persion = new Person();
 		persion.setSsn(1);
 		
-		List<Account> accounts = new ArrayList<Account>();
+		List<Account2> accounts = new ArrayList<Account2>();
 		
-		Account account = new Account();
+		Account2 account = new Account2();
 		//account.setId("1111111");
 		account.setTotal(11.0f);
 		mongoTemplate.save(account);
 		
-		Account account2 = new Account();
+		Account2 account2 = new Account2();
 		//account2.setId("1111122");
 		account2.setTotal(11.0f);
 		mongoTemplate.save(account2);
@@ -202,7 +202,7 @@ public class FirendCircleTest {
 		//update.inc("total",99.99f);
 		update.set("total",99.99f);
 		//update.addToSet("total", 11.2);
-		mongoTemplate.findAndModify(query, update, Account.class);
+		mongoTemplate.findAndModify(query, update, Account2.class);
 	}
 	
 	
