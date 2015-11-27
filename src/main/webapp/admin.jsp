@@ -5,11 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>登录首页</title>
+<title>admin</title>
 </head>
 <body>
-<span color="red">登录成功!</span>
-<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-<a href="admin.jsp">admin</a>
+admin
 </body>
 </html>

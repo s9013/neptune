@@ -37,6 +37,7 @@ public class AccountService implements IAccountService {
 			mongoTemplate.save(user);
 			account.setUser(user);
 			
+			account.setId(user.getId());
 			mongoTemplate.save(account);
 		} catch (Exception e) {
 			e.printStackTrace();

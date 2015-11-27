@@ -5,6 +5,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +35,13 @@ public class TestController {
 	@RequestMapping(value="testMvc")
 	public String testMvc(){
 		logger.info("test mvc>>>");
+		
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+			    .getAuthentication()
+			    .getPrincipal();
+		
+		logger.info(userDetails.toString());
+		
 		String str = testService.test();
 		logger.debug(str);
 		return str;

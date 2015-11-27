@@ -82,3 +82,20 @@
 			<version>1.8.0.RELEASE</version>
 		</dependency>
 		
+		
+## spring security
+	
+		<html><head><title>Login Page</title></head><body onload='document.f.username.focus();'>
+	<h3>Login with Username and Password</h3><form name='f' action='/neptune/login' method='POST'>
+	<table>
+		<tr><td>User:</td><td><input type='text' name='username' value=''></td></tr>
+		<tr><td>Password:</td><td><input type='password' name='password'/></td></tr>
+		<tr><td colspan='2'><input name="submit" type="submit" value="Login"/></td></tr>
+		<input name="_csrf" type="hidden" value="20fec102-bd9e-4c3f-b3db-ed0107d4c4da" />
+	</table>
+	</form></body></html>		
+	
+	
+	Failed to evaluate expression 'ROLE_USER'
+		http://bbs.csdn.net/topics/360183919
+		

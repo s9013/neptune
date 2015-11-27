@@ -27,4 +27,11 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 
+
+	<!-- Imports logging configuration -->
+<!-- 	<import resource="trace-context.xml"/>
+	
+	Imports datasource configuration
+	<import resource="spring-data.xml"/> -->
+
 </beans>

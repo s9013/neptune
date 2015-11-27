@@ -4,16 +4,16 @@ define(['jquery'],function () {
 	
 	$('#login').on('click',function(){
 		var accountVo = {
-				username:'1234',
+				username:'1235',
 				password:'123456'
 		};
 		
 		$.ajax({
 		    type: 'POST',
 		    url: 'account/login',
-		    headers: {'Content-type': 'application/json;charset=UTF-8'},
+		    contentType : 'application/json',  
 		    dataType: 'json',
-		    data: accountVo ,
+		    data: JSON.stringify(accountVo) ,
 		    success:function(data, textStatus, jqXHR){
 		    	console.log(data);
 		    } ,
