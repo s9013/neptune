@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户登录</title>
 </head>
-<body onLoad="document.f.j_username.focus();">
+<body>
 	<c:if test="${not empty param.login_error}">
 		<font color="red"> 登录失败，请重试.<br />
 		<br /> 原因:<c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />

@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,13 +31,15 @@ public class CustomAuthProvider implements AuthenticationProvider {
 	        System.out.println("getAuthorities: "+authentication.getAuthorities());
 	        System.out.println("getDetails: "+authentication.getDetails());
 		
-		logger.debug("登录名为密码为"+authentication.getCredentials());
+		logger.info("登录名为密码为"+authentication.getName()+authentication.getCredentials());
 		UserDetails userDetails=userDetailsService.loadUserByUsername(authentication.getName());
 		if (!userDetails.getPassword().equals(authentication.getCredentials())) {
 			throw new BadCredentialsException("登录失败");
 		}
+		
+		return new UsernamePasswordAuthenticationToken(userDetails,authentication.getCredentials(),userDetails.getAuthorities());
 
-		return authentication;
+		//return authentication;
 	}
 
 
@@ -44,4 +47,6 @@ public class CustomAuthProvider implements AuthenticationProvider {
 		return true;
 	}
 
+	
+	
 }
