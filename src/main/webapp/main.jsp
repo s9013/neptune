@@ -13,6 +13,24 @@
 					<span id="userId"></span>
 					<a href="admin.jsp">admin</a>
 			</div>
+			
+			
+			<div>
+
+			  <!-- Nav tabs -->
+			  <ul class="nav nav-tabs" role="tablist">
+			    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">聊天</a></li>
+			    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">动态</a></li>
+			  </ul>
+			
+			  <!-- Tab panes -->
+			  <div class="tab-content">
+			    <div role="tabpanel" class="tab-pane active" id="home">聊天</div>
+			    <div role="tabpanel" class="tab-pane" id="profile">动态</div>
+			  </div>
+
+</div>
+			
 	</body>
 	<script data-main="js/config" src="lib/requirejs/require.js"></script>
 </html>

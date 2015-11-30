@@ -1,5 +1,7 @@
 package com.boot.service.iface;
 
+import com.boot.entity.mongo.Friends;
+
 /**
 *@Auth						jay
 *@date						2015年11月26日 上午10:20:21
@@ -18,5 +20,12 @@ public interface IFriendCircle {
 	 * @param userId
 	 */
 	public void getDynamic(String userId);
+	
+	/**
+	 * 根据id获取朋友
+	 * @param userId
+	 * @return
+	 */
+	public Friends getFriends(String userId);
 	
 }

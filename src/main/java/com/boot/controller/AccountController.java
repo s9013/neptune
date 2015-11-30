@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.boot.entity.mongo.Friends;
 import com.boot.service.iface.IAccountService;
 import com.boot.vo.AccountVo;
 import com.boot.vo.UserVo;
@@ -65,12 +66,12 @@ public class AccountController {
 	 */
 	@RequestMapping(value="getCurrentUserInfo",method=RequestMethod.POST)
 	@ResponseBody
-	public UserVo getCurrentUserInfo(){
+	public Friends getCurrentUserInfo(){
 		logger.info("get current user info >>>");
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
 			    .getAuthentication()
 			    .getPrincipal();
-		UserVo vo = accountService.getCurrentUser(userDetails.getUsername());
+		Friends vo = accountService.getCurrentUser(userDetails.getUsername());
 		logger.info(vo.toString());
 		return vo;
 	}

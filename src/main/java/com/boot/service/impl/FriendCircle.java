@@ -2,6 +2,7 @@ package com.boot.service.impl;
 
 import org.springframework.stereotype.Service;
 
+import com.boot.entity.mongo.Friends;
 import com.boot.service.iface.IFriendCircle;
 
 /**
@@ -17,6 +18,11 @@ public class FriendCircle implements IFriendCircle {
 
 	public void getDynamic(String userId) {
 
+	}
+
+	public Friends getFriends(String userId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
