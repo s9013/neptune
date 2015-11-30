@@ -3,6 +3,8 @@ package com.boot.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.boot.service.iface.IAccountService;
 import com.boot.vo.AccountVo;
+import com.boot.vo.UserVo;
 import com.boot.vo.common.ResultVo;
 
 /** 
@@ -55,5 +58,21 @@ public class AccountController {
 		return resultVo;
 	}
 	
+	/**
+	 * 获取登人用户信息
+	 * @param accountVo
+	 * @return
+	 */
+	@RequestMapping(value="getCurrentUserInfo",method=RequestMethod.POST)
+	@ResponseBody
+	public UserVo getCurrentUserInfo(){
+		logger.info("get current user info >>>");
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+			    .getAuthentication()
+			    .getPrincipal();
+		UserVo vo = accountService.getCurrentUser(userDetails.getUsername());
+		logger.info(vo.toString());
+		return vo;
+	}
 }
 

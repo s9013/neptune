@@ -10,6 +10,7 @@ import com.boot.entity.mongo.Account;
 import com.boot.entity.mongo.User;
 import com.boot.service.iface.IAccountService;
 import com.boot.vo.AccountVo;
+import com.boot.vo.UserVo;
 import com.boot.vo.common.ResultVo;
 
 /** 
@@ -65,6 +66,20 @@ public class AccountService implements IAccountService {
 		}
 		
 		return resultVo;
+	}
+
+	public UserVo getCurrentUser(String username) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(username));
+		Account account = mongoTemplate.findOne(query, Account.class);
+		
+		UserVo userVo = new UserVo();
+		if(account != null){
+			userVo.setId(account.getId());
+			userVo.setUsername(account.getUser().getUsername());
+		}
+		
+		return userVo;
 	}
 
 }

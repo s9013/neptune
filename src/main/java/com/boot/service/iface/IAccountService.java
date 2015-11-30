@@ -1,6 +1,7 @@
 package com.boot.service.iface;
 
 import com.boot.vo.AccountVo;
+import com.boot.vo.UserVo;
 import com.boot.vo.common.ResultVo;
 
 /** 
@@ -25,5 +26,9 @@ public interface IAccountService {
 	 */
 	public ResultVo login(AccountVo accountVo);
 	
+	/**
+	 * 根据用户名获取用户信息
+	 */
+	public UserVo getCurrentUser(String username);
 }
 
