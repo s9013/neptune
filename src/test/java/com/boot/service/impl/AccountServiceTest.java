@@ -38,6 +38,9 @@ public class AccountServiceTest {
 		logger.info("add account");
 		AccountVo accountVo = new AccountVo("mike", "123456");
 		ResultVo resultVo = accountService.addAccount(accountVo);
+		
+		AccountVo accountVo1 = new AccountVo("jay", "123456");
+		ResultVo resultVo1 = accountService.addAccount(accountVo1);
 		logger.info(resultVo.toString());
 	}
 

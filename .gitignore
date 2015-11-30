@@ -5,3 +5,5 @@
 /src/main/webapp/node_modules/
 
 *~
+
+*.log

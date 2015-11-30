@@ -1,5 +1,6 @@
 package com.boot.controller;
 
+import org.hibernate.usertype.UserVersionType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,12 +67,12 @@ public class AccountController {
 	 */
 	@RequestMapping(value="getCurrentUserInfo",method=RequestMethod.POST)
 	@ResponseBody
-	public Friends getCurrentUserInfo(){
+	public UserVo getCurrentUserInfo(){
 		logger.info("get current user info >>>");
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
 			    .getAuthentication()
 			    .getPrincipal();
-		Friends vo = accountService.getCurrentUser(userDetails.getUsername());
+		UserVo vo = accountService.getCurrentUser(userDetails.getUsername());
 		logger.info(vo.toString());
 		return vo;
 	}

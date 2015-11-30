@@ -1,6 +1,7 @@
 package com.boot.service.iface;
 
 import com.boot.entity.mongo.Friends;
+import com.boot.vo.common.ResultVo;
 
 /**
 *@Auth						jay
@@ -12,7 +13,7 @@ public interface IFriendCircle {
 	/**
 	 * 发表动态
 	 */
-	public void post();
+	public ResultVo post();
 	
 	
 	/**

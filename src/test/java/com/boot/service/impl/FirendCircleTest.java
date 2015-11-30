@@ -68,9 +68,9 @@ public class FirendCircleTest {
 	@Test
 	@Transactional
 	public void testAddFriend() {
-		String userId = "5657b505e4b0e53053f19e1d";//jay
+		String userId = "565c4d059ffaffb3809b0429";//jay
 		//String addedUserId = "56567084e4b02efa27316570";//jack
-		String addedUserId = "565c1425e4b080a01469d95b";//mike
+		String addedUserId = "565c4d069ffaffb3809b042a";//mike
 		//String addedUserId = "56567084e4b02efa27316572";//seal  添加
 		
 		Query query = new Query();
@@ -133,7 +133,7 @@ public class FirendCircleTest {
 	@Test
 	@Transactional
 	public void testGetFriend() {
-		Friends friends = mongoTemplate.findOne(new Query(Criteria.where("userId").is( "5657b505e4b0e53053f19e1d")),Friends.class);
+		Friends friends = mongoTemplate.findOne(new Query(Criteria.where("userId").is( "565c4d059ffaffb3809b0429")),Friends.class);
 		logger.info("result: " + friends.toString());
 	}
 	

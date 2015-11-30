@@ -14,5 +14,16 @@ define(['jquery','bootstrap'],function () {
 		    } ,
 		});
 
+		
+		$.ajax({
+		    type: 'POST',
+		    url: 'friend/getFriends',
+		    contentType : 'application/json',  
+		    dataType: 'json',
+		    success:function(data, textStatus, jqXHR){
+		    	console.log('friends');
+		    	console.log(data);
+		    } ,
+		});
 	
 });
