@@ -62,4 +62,9 @@ public class User implements Serializable {
 		this.picture = picture;
 	}
 
+	public User(String username) {
+		super();
+		this.username = username;
+	}
+
 }

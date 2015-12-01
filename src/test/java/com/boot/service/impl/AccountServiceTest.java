@@ -1,5 +1,8 @@
 package com.boot.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -8,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.boot.entity.mongo.Friends;
+import com.boot.entity.mongo.Group;
+import com.boot.entity.mongo.User;
 import com.boot.service.iface.IAccountService;
 import com.boot.vo.AccountVo;
 import com.boot.vo.common.ResultVo;
@@ -36,11 +42,21 @@ public class AccountServiceTest {
 	@Test
 	public void testAddAccount() {
 		logger.info("add account");
-		AccountVo accountVo = new AccountVo("mike", "123456");
-		ResultVo resultVo = accountService.addAccount(accountVo);
 		
 		AccountVo accountVo1 = new AccountVo("jay", "123456");
 		ResultVo resultVo1 = accountService.addAccount(accountVo1);
+		
+		AccountVo accountVo = new AccountVo("mike", "123456");
+		ResultVo resultVo = accountService.addAccount(accountVo);
+		
+
+		
+		
+		
+		
+//		AccountVo accountVo2 = new AccountVo("jack", "123456");
+//		ResultVo resultVo2 = accountService.addAccount(accountVo2);
+		
 		logger.info(resultVo.toString());
 	}
 

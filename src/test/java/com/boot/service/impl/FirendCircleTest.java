@@ -1,11 +1,8 @@
 package com.boot.service.impl;
 
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -24,8 +21,11 @@ import com.boot.entity.mongo.Account2;
 import com.boot.entity.mongo.Friends;
 import com.boot.entity.mongo.Group;
 import com.boot.entity.mongo.Person;
+import com.boot.entity.mongo.Post;
 import com.boot.entity.mongo.User;
 import com.boot.service.iface.IFriendCircle;
+import com.boot.vo.PostVo;
+import com.boot.vo.common.ResultVo;
 
 /**
 *@Auth						jay
@@ -62,17 +62,91 @@ public class FirendCircleTest {
 		mongoTemplate.save(new User("Sean", "picture4"));
 	}
 	
+	
 	/**
 	 * 添加好友
 	 */
 	@Test
 	@Transactional
 	public void testAddFriend() {
-		String userId = "565c4d059ffaffb3809b0429";//jay
-		//String addedUserId = "56567084e4b02efa27316570";//jack
-		String addedUserId = "565c4d069ffaffb3809b042a";//mike
-		//String addedUserId = "56567084e4b02efa27316572";//seal  添加
+		String userId = "565d3cc1e4b060bd46f13e9e";//jay
+		String addedUserId = "565d3cc1e4b060bd46f13ea1";//mike
+		addFriend2(userId,addedUserId);
+
+	}
+	
+	
+	/**
+	 * 添加好友
+	 */
+	public void addFriend2(String userId,String addedUserId) {
+
+		// 1
+		Friends friends = mongoTemplate.findOne(new Query(Criteria.where("userId").is(userId)), Friends.class);
+		User user = mongoTemplate.findOne(new Query(Criteria.where("id").is(userId)), User.class);
 		
+		// 2
+		Friends friends2 = mongoTemplate.findOne(new Query(Criteria.where("userId").is(addedUserId)), Friends.class);
+		User user2 = mongoTemplate.findOne(new Query(Criteria.where("id").is(addedUserId)), User.class);
+		
+		
+		String groupId1 = "565d3cc1e4b060bd46f13e9f";
+		String groupId2 = "565d3cc2e4b060bd46f13ea2";
+	
+		List<Group> groups  = friends.getGroupList();
+		// 查找并修改
+		for (int i = 0; i < groups.size(); i++) {
+			if(groups.get(i).getId().equals("565d3cc1e4b060bd46f13e9f")){//组id传进来
+				List<User> users = groups.get(i).getUsers();
+				users.add(user2);
+				
+				Group g = groups.get(i);
+				g.setUsers(users);
+				groups.set(i, g);
+				
+				mongoTemplate.save(g);
+				
+			}
+		}
+			friends.setGroupList(groups);
+			List<String> groupIds  = new ArrayList<String>();
+			groupIds.add(groupId2);
+			friends.setGroupIdList(groupIds);
+			
+			logger.info(friends.toString());
+			mongoTemplate.save(friends);
+
+			
+			List<Group> groups2  = friends2.getGroupList();
+			// 查找并修改
+			for (int i = 0; i < groups2.size(); i++) {
+				if(groups2.get(i).getId().equals("565d3cc2e4b060bd46f13ea2")){//组id传进来
+					List<User> users = groups2.get(i).getUsers();
+					users.add(user);
+					
+					Group g = groups2.get(i);
+					g.setUsers(users);
+					groups.set(i, g);
+					
+					mongoTemplate.save(g);
+					
+				}
+			}
+				friends.setGroupList(groups2);
+				logger.info(friends.toString());
+				List<String> groupIds2  = new ArrayList<String>();
+				groupIds2.add(groupId1);
+				friends2.setGroupIdList(groupIds2);
+				mongoTemplate.save(friends2);
+			
+	}
+	
+	
+	/**
+	 * 添加好友
+	 */
+	public void addFriend(String userId,String addedUserId) {
+
 		Query query = new Query();
 		query.addCriteria(Criteria.where("userId").is(userId));//Jay
 		Friends friends = mongoTemplate.findOne(query, Friends.class);
@@ -81,9 +155,7 @@ public class FirendCircleTest {
 		User user = mongoTemplate.findOne(new Query(Criteria.where("id").is(addedUserId)), User.class);
 		
 		if(friends == null){
-			
-			
-			
+
 			// 组
 			Group group = new Group();
 			group.setName("我的好友");
@@ -100,6 +172,35 @@ public class FirendCircleTest {
 			groups.add(group);
 			friends.setGroupList(groups);
 
+			
+			Friends f = 	mongoTemplate.findOne(new Query(Criteria.where("userId").is(addedUserId)), Friends.class);
+			if(f == null){
+				f = new Friends();
+				
+				Group group2 = new Group();
+				group2.setName("我的好友");
+				List<User> users2 = new ArrayList<User>();
+				User user2 = mongoTemplate.findOne(new Query(Criteria.where("id").is(addedUserId)), User.class);
+				users2.add(user2);
+				group2.setUsers(users2);
+				
+				mongoTemplate.save(group2);
+				
+			
+				f.setUserId(userId);
+				List<Group> groups2 = new ArrayList<Group>();
+				groups2.add(group2);
+				f.setGroupList(groups2);
+			}
+			
+			List<String> groupIds =	f.getGroupIdList();
+			if(groupIds == null){
+				groupIds = new ArrayList<String>();
+			}
+			groupIds.add(group.getId());
+			f.setGroupIdList(groupIds);
+			mongoTemplate.save(f);
+			
 			mongoTemplate.save(friends);
 			
 		}else{
@@ -140,12 +241,22 @@ public class FirendCircleTest {
 	
 	@Test
 	public void testPost() {
-		friendCircle.post();
+		
+		PostVo postVo = new PostVo();
+		postVo.setContent("test123发了一个动态22222222222");
+		postVo.setUser(new User("jay"));
+		postVo.setGroupId("565d3cc1e4b060bd46f13e9f");
+		ResultVo result =	friendCircle.post(postVo);
+		logger.info("result: " + result.toString());
+		
 	}
 
 	@Test
 	public void testGetDynamic() {
-		fail("Not yet implemented");
+		
+		List<Post> posts =  friendCircle.getDynamic("5657b505e4b0e53053f19e1d");
+	
+		logger.info("result : " + posts.toString());
 	}
 
 	

@@ -24,6 +24,9 @@ public class Post implements Serializable {
 	// 作者
 	@DBRef
 	private User user;
+	
+	// 作者id
+	private String userId;
 
 	// 内容
 	private Content content;
@@ -111,6 +114,14 @@ public class Post implements Serializable {
 
 	public void setGroupId(String groupId) {
 		this.groupId = groupId;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 
