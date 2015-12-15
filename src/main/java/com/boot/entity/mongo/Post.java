@@ -42,6 +42,8 @@ public class Post implements Serializable {
 
 	// 组
 	private String groupId;
+	
+	private Long viewCount = 0l;//浏览量
 
 	public Post() {
 	}

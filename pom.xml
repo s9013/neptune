@@ -116,6 +116,13 @@
 			<version>1.8.0.RELEASE</version>
 		</dependency>
 
+		<!-- spring data redis -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>1.6.1.RELEASE</version>
+		</dependency>
+
 		<!-- spring security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>

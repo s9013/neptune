@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import com.boot.entity.mongo.Account;
@@ -53,7 +54,7 @@ public class FriendCircle implements IFriendCircle {
 	public java.util.List<Post> getMyDynamic(String userId) {
 		Account account = mongoTemplate.findOne(new Query(Criteria.where("username").is(userId)), Account.class);
 		java.util.List<Post> posts =	mongoTemplate.find(new Query(Criteria.where("userId").is(account.getId())), Post.class);
-		
+		Update update = new Update();
 		return posts;
 		
 	}

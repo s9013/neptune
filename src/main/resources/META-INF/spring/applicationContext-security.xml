@@ -37,7 +37,7 @@
 <http pattern="/login.jsp*" security="none"/>
 
 <!-- Additional filter chain for normal users, matching all other requests -->
- <http auto-config="true">
+ <http auto-config="true"    create-session="stateless">
  <intercept-url pattern='/admin.jsp' access="hasRole('ROLE_admin')" />
 <intercept-url pattern='/**' access="hasRole('ROLE_USER')" />
 <form-login login-page='/login.jsp' default-target-url="/main.jsp" authentication-failure-url="/login.jsp?login_error=1"  always-use-default-target="true"/>
